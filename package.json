@@ -1,0 +1,36 @@
+{
+  "name": "discord-notifications",
+  "author": "Nathan Taggart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [
+    "discord",
+    "webhooks",
+    "style",
+    "release"
+  ],
+  "scripts": {
+    "build": "ncc build index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meisnate12/discord-notifications.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meisnate12/discord-notifications/issues"
+  },
+  "homepage": "https://github.com/meisnate12/discord-notifications#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@vercel/ncc": "^0.28.3"
+  }
+}

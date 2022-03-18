@@ -1,0 +1,39 @@
+name: Discord Style realeses with webhooks
+description: Sends automatic releases to Discord, using a webhook.
+inputs:
+  webhook_id:
+    description: Discord's webhook id. Use GH repo secrets.
+    required: true
+  webhook_token:
+    description: Discord's webhook token. Use GH repo secrets.
+    required: true
+  title:
+    description: Title of the message
+    required: false
+    default: Release VERSION
+  color:
+    description: Embed Color
+    required: false
+    default: "3447003"
+  description:
+    description: Message Contents
+    required: false
+  url:
+    description: Title URL
+    required: false
+  username:
+    description: Message Username
+    required: false
+  avatar_url:
+    description: Avatar URL
+    required: false
+  release:
+    description: Added Github Release to Description
+    required: false
+    default: "false"
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  color: orange
+  icon: align-justify
