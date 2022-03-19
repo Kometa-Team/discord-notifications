@@ -5951,7 +5951,7 @@ async function run () {
         embedMsg['title'] = title
         if (url)
             embedMsg['url'] = url
-        const text = ''
+        let text = ''
         for (let i = 0; i < github.context.payload.commits.length; i++)
             text += github.context.payload.commits[i].message + '\n';
         embedMsg['description'] = text
