@@ -17,18 +17,18 @@ async function run () {
     const isRelease = core.getInput('release')
     const isCommits = core.getInput('commits')
     if (isRelease == 'true') {
-        embedMsg['title'] = title.replace('VERSION', github.context.payload.release.tag_name)
-        release = github.context.payload.release
+        const release = github.context.payload.release
+        embedMsg['title'] = title.replace('VERSION', release.tag_name)
         embedMsg['description'] = description.length < 1500 ? release.body : release.body.substring(0, 1500) + ` ([...](${release.html_url}))`
         embedMsg['url'] = url ? url : release.html_url
     }
     else if (isCommits == 'true') {
+        const commits = github.context.payload.commits
         embedMsg['title'] = title
-        if (url)
-            embedMsg['url'] = url
-        const text = ''
-        for (let i = 0; i < github.context.payload.commits.length; i++)
-            text += github.context.payload.commits[i].message + '\n';
+        embedMsg['url'] = url ? url : compare
+        let text = ''
+        for (let i = 0; i < commits.length; i++)
+            text += '[`' + commits[i].id + '`](' + commits[i].url + ') ' + commits[i].message + '\n';
         embedMsg['description'] = text
     }
     else {
