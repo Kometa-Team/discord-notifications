@@ -28,7 +28,11 @@ inputs:
     description: Avatar URL
     required: false
   release:
-    description: Added Github Release to Description
+    description: Add Github Release to Description
+    required: false
+    default: "false"
+  commits:
+    description: Add Github Commits to Description
     required: false
     default: "false"
 runs:
