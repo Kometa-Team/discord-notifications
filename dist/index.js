@@ -5941,13 +5941,13 @@ async function run () {
     const url = core.getInput('url')
     const isRelease = core.getInput('release')
     const isCommits = core.getInput('commits')
-    if (isRelease) {
+    if (isRelease == 'true') {
         embedMsg['title'] = title.replace('VERSION', github.context.payload.release.tag_name)
         release = github.context.payload.release
         embedMsg['description'] = description.length < 1500 ? release.body : release.body.substring(0, 1500) + ` ([...](${release.html_url}))`
         embedMsg['url'] = url ? url : release.html_url
     }
-    else if (isCommits) {
+    else if (isCommits == 'true') {
         embedMsg['title'] = title
         if (url)
             embedMsg['url'] = url
