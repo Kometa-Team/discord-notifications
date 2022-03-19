@@ -25,7 +25,7 @@ async function run () {
     else if (isCommits == 'true') {
         const commits = github.context.payload.commits
         embedMsg['title'] = title
-        embedMsg['url'] = url ? url : compare
+        embedMsg['url'] = url ? url : github.context.payload.compare
         let text = ''
         for (let i = 0; i < commits.length; i++)
             text += '[`' + commits[i].id + '`](' + commits[i].url + ') ' + commits[i].message + '\n';
