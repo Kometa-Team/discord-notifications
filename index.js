@@ -27,8 +27,8 @@ async function run () {
         if (url)
             embedMsg['url'] = url
         const text = ''
-        for (let i = 0; i < github.event.commits.length; i++)
-            text += github.event.commits[i].message + '\n';
+        for (let i = 0; i < github.context.payload.commits.length; i++)
+            text += github.context.payload.commits[i].message + '\n';
         embedMsg['description'] = text
     }
     else {
