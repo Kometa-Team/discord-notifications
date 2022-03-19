@@ -28,7 +28,7 @@ async function run () {
         embedMsg['url'] = url ? url : github.context.payload.compare
         let text = ''
         for (let i = 0; i < commits.length; i++)
-            text += '[`' + commits[i].id + '`](' + commits[i].url + ') ' + commits[i].message + '\n';
+            text += '[`' + commits[i].id.substring(0, 7) + '`](' + commits[i].url + ') ' + commits[i].message + '\n';
         embedMsg['description'] = text
     }
     else {
