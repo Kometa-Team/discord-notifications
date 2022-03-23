@@ -5964,6 +5964,19 @@ async function run () {
             embedMsg['url'] = url
     }
 
+    const author = core.getInput('author')
+    const author_url = core.getInput('author_url')
+    const author_icon_url = core.getInput('author_icon_url')
+
+    if (author || author_url || author_icon_url)
+        embedMsg['author'] = { }
+    if (author)
+        embedMsg['author']['name'] = author
+    if (author_url)
+        embedMsg['author']['url'] = author_url
+    if (author_icon_url)
+        embedMsg['author']['icon_url'] = author_icon_url
+
     const body = { embeds: [embedMsg] }
 
     const username = core.getInput('username')
@@ -5972,6 +5985,9 @@ async function run () {
     const avatar_url = core.getInput('avatar_url')
     if (avatar_url)
         body['avatar_url'] = avatar_url
+    const message = core.getInput('message')
+    if (message)
+        body['content'] = message
 
     const discord = `https://discord.com/api/webhooks/${core.getInput('webhook_id')}/${core.getInput('webhook_token')}?wait=true`
 

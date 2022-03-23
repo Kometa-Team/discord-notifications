@@ -16,7 +16,7 @@ inputs:
     required: false
     default: "3447003"
   description:
-    description: Message Contents
+    description: Embeded Message Contents
     required: false
   url:
     description: Title URL
@@ -26,6 +26,18 @@ inputs:
     required: false
   avatar_url:
     description: Avatar URL
+    required: false
+  author:
+    description: Author Name
+    required: false
+  author_url:
+    description: Author Name URL
+    required: false
+  author_icon_url:
+    description: Author Icon URL
+    required: false
+  message:
+    description: Message Contents
     required: false
   release:
     description: Add Github Release to Description
