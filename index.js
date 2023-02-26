@@ -5,9 +5,12 @@ const fetch = require('node-fetch')
 async function run () {
     const webhookId = core.getInput('webhook_id')
     const webhookToken = core.getInput('webhook_token')
+    const webhookIdToken = core.getInput('webhook_id_token')
 
-    if (!webhookId || !webhookToken)
-      return core.setFailed('webhook_id or webhook_token is missing')
+    if ((!webhookId || !webhookToken) && !webhookIdToken)
+      return core.setFailed('webhook_id_token, webhook_id, or webhook_token is missing')
+    if (webhookId.indexOf('E') > -1)
+      return core.setFailed('webhook_id must be a string')
 
     const embedMsg = { }
     const title = core.getInput('title')
@@ -64,9 +67,9 @@ async function run () {
     if (message)
         body['content'] = message
 
-    const discord = `https://discord.com/api/webhooks/${core.getInput('webhook_id')}/${core.getInput('webhook_token')}?wait=true`
-
-    fetch(discord, {
+    console.log(JSON.stringify(body))
+    const webhook = 'https://discord.com/api/webhooks/' + (webhookIdToken ? webhookIdToken : (webhookId + '/' + webhookToken)) + '?wait=true'
+    fetch(webhook, {
       method: 'post',
       body: JSON.stringify(body),
       headers: { 'Content-Type': 'application/json' }

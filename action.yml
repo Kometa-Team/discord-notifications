@@ -1,12 +1,15 @@
-name: Discord Style realeses with webhooks
-description: Sends automatic releases to Discord, using a webhook.
+name: Discord Notifications
+description: Sends Discord Notifications, using a webhook.
 inputs:
   webhook_id:
-    description: Discord's webhook id. Use GH repo secrets.
-    required: true
+    description: Discord's webhook id.
+    required: false
   webhook_token:
-    description: Discord's webhook token. Use GH repo secrets.
-    required: true
+    description: Discord's webhook token.
+    required: false
+  webhook_id_token:
+    description: Discord's webhook id and Discord's webhook token "id/token".
+    required: false
   title:
     description: Title of the message
     required: false
@@ -48,7 +51,7 @@ inputs:
     required: false
     default: "false"
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
 branding:
   color: orange
