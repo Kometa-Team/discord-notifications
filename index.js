@@ -22,7 +22,9 @@ async function run () {
     if (isRelease == 'true') {
         const release = github.context.payload.release
         embedMsg['title'] = title.replace('VERSION', release.tag_name)
-        embedMsg['description'] = description.length < 1500 ? release.body : release.body.substring(0, 1500) + ` ([...](${release.html_url}))`
+        description = release.body
+        const extra = ` ([...](${release.html_url}))`
+        embedMsg['description'] = description.length < 2048 - extra.length ? description : description.substring(0, 2048 - extra.length) + extra
         embedMsg['url'] = url ? url : release.html_url
     }
     else if (isCommits == 'true') {
