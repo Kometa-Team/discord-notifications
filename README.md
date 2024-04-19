@@ -22,7 +22,7 @@ jobs:
     name: Sends custom message
     steps:
       - name: Sending message
-        uses: meisnate12/discord-release-action@v1.0.0
+        uses: Kometa-Team/discord-notifications@master
         with:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
