@@ -24,7 +24,7 @@ async function run () {
         embedMsg['title'] = title.replace('VERSION', release.tag_name)
         const release_des = release.body
         const extra = ` ([...](${release.html_url}))`
-        embedMsg['description'] = release_des.length < 2048 - extra.length ? release_des : release_des.substring(0, 2048 - extra.length) + extra
+        embedMsg['description'] = release_des.length < 4096 - extra.length ? release_des : release_des.substring(0, 4096 - extra.length) + extra
         embedMsg['url'] = url ? url : release.html_url
     }
     else if (isCommits == 'true') {
