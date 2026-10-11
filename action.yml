@@ -1,57 +1,57 @@
 name: Discord Notifications
-description: Sends Discord Notifications, using a webhook.
+description: Sends Discord notifications through a webhook.
 inputs:
   webhook_id:
-    description: Discord's webhook id.
+    description: Discord webhook ID.
     required: false
   webhook_token:
-    description: Discord's webhook token.
+    description: Discord webhook token.
     required: false
   webhook_id_token:
-    description: Discord's webhook id and Discord's webhook token "id/token".
+    description: Discord webhook ID and token in `id/token` format.
     required: false
   title:
-    description: Title of the message
+    description: Message title.
     required: false
     default: Release VERSION
   color:
-    description: Embed Color
+    description: Embed color as a decimal integer.
     required: false
     default: "3447003"
   description:
-    description: Embeded Message Contents
+    description: Embed description.
     required: false
   url:
-    description: Title URL
+    description: URL linked from the message title.
     required: false
   username:
-    description: Message Username
+    description: Username shown on the message.
     required: false
   avatar_url:
-    description: Avatar URL
+    description: Avatar URL shown on the message.
     required: false
   author:
-    description: Author Name
+    description: Embed author name.
     required: false
   author_url:
-    description: Author Name URL
+    description: URL linked from the embed author name.
     required: false
   author_icon_url:
-    description: Author Icon URL
+    description: Icon URL shown next to the embed author name.
     required: false
   message:
-    description: Message Contents
+    description: Plain-text message content.
     required: false
   release:
-    description: Add Github Release to Description
+    description: Use GitHub release details in the embed.
     required: false
     default: "false"
   commits:
-    description: Add Github Commits to Description
+    description: Use push-event commit details in the embed.
     required: false
     default: "false"
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'
 branding:
   color: orange

@@ -1,8 +1,8 @@
-const core = require('@actions/core')
-const github = require('@actions/github')
-const fetch = require('node-fetch')
+async function run (dependencies = {}) {
+    const core = dependencies.core || await import('@actions/core')
+    const github = dependencies.github || await import('@actions/github')
+    const fetch = dependencies.fetch || (await import('node-fetch')).default
 
-async function run () {
     const webhookId = core.getInput('webhook_id')
     const webhookToken = core.getInput('webhook_token')
     const webhookIdToken = core.getInput('webhook_id_token')
@@ -71,14 +71,20 @@ async function run () {
 
     console.log(JSON.stringify(body))
     const webhook = 'https://discord.com/api/webhooks/' + (webhookIdToken ? webhookIdToken : (webhookId + '/' + webhookToken)) + '?wait=true'
-    fetch(webhook, {
-      method: 'post',
-      body: JSON.stringify(body),
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(res => res.json())
-      .then(data => core.info(JSON.stringify(data)))
-      .catch(err => core.info(err))
+    try {
+        const response = await fetch(webhook, {
+          method: 'post',
+          body: JSON.stringify(body),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        core.info(JSON.stringify(await response.json()))
+    }
+    catch (err) {
+        core.info(err)
+    }
 }
 
-run()
+if (require.main === module)
+    run()
+
+module.exports = { run }

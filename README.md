@@ -1,60 +1,49 @@
-# discord-notifications
-*Action that uses a webhook for sending automatic Discord messages on new repository releases.*
+# Discord Notifications
 
-![alt](https://i.imgur.com/jwo6XsD.png)
+GitHub Action for posting Discord notifications through a webhook when a repository release is published.
 
-### Example usage
+![Discord notification example](assets/example-notification.png)
 
-Create file `discord-release-msg.yml` under folder `.github/workflows` in your project's root folder:
->.github/workflows/discord-release-msg.yml
+## Usage
+
+Create `.github/workflows/discord-release-msg.yml` in your repository:
 
 ```yml
-
-name: Release messages to discord announcement channel
+name: Post release notification to Discord
 
 on:
   release:
     types: [ published ]
 
 jobs:
-  run_main:
-    runs-on: ubuntu-18.04
-    name: Sends custom message
+  notify:
+    name: Post release notification
+    runs-on: ubuntu-latest
     steps:
-      - name: Sending message
-        uses: Kometa-Team/discord-notifications@master
+      - name: Send notification
+        # Replace COMMIT_SHA with the 40-character SHA of a published Node 24 release commit.
+        uses: Kometa-Team/discord-notifications@COMMIT_SHA
         with:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
 ```
 
-### Create a webhook
+## Create a Discord webhook
 
-To create a new webhook in discord go to **Channel > Edit > Integrations > Webhooks > New Webhook**
+In Discord, open the target channel and select **Edit Channel** > **Integrations** > **Webhooks** > **New Webhook**.
 
-Once you have the webhoook URL, you can get the `ID` and the `TOKEN`. They are included in the URL like so:
+The webhook URL contains both values required by the action:
 
-> https://discord.com/api/webhooks/ID/TOKEN
+`https://discord.com/api/webhooks/WEBHOOK_ID/WEBHOOK_TOKEN`
 
+## Configure repository secrets
 
-### Adding necessary secrets
+Store the webhook values as repository secrets so they are not exposed in your workflow. In GitHub, open **Settings** > **Secrets and variables** > **Actions**, then create these repository secrets:
 
-This is needed to not expose your `ID/TOKEN` (which would mean anybody can use your webhook)
+- `DISCORD_WEBHOOK_ID`: the `WEBHOOK_ID` portion of the URL.
+- `DISCORD_WEBHOOK_TOKEN`: the `WEBHOOK_TOKEN` portion of the URL.
 
-In your github project go to **Settings > Secrets > New repository secret**
-
-And add these two secrets (`New repository secret` button):
-
-
->Name: DISCORD_WEBHOOK_ID
-Value: ID (from url)
-
->Name: DISCORD_WEBHOOK_TOKEN
-Value: TOKEN (from url)
-
----
-
-Now every new project release will send a POST using the created webhook, posting a new styled message in the channel where the webhook was created.
+Each published release will now post a formatted notification to the selected Discord channel.
 
 
 
