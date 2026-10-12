@@ -16,7 +16,7 @@ jobs:
 
       - name: Check Out Repo
         # v7.0.1
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Update Copyright
         run: sed -i -E 's/(Copyright \(c\) ).+( meisnate12)/\1${{ steps.date.outputs.year }}\2/' LICENSE
